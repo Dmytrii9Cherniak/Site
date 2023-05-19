@@ -1,0 +1,138 @@
+@import 'src/index.scss';
+
+.footer {
+  padding: 40px 96px 44px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+    .footer_left_part {
+      display: flex;
+      flex-direction: column;
+      row-gap: 16px;
+
+      p {
+        width: 400px;
+        @include setupFontValues(400, 14px, 160%);
+        color: #3E434D;
+      }
+
+      img {
+        width: 424px;
+        display: block;
+      }
+    }
+
+  .footer_center_part {
+    display: flex;
+    flex-direction: column;
+    row-gap: 14px;
+
+    a {
+      text-decoration: none;
+      @include setupFontValues(400, 16px, 160%);
+      color: #3E434D;
+
+      &:hover {
+        color: #008D6A;
+        text-decoration: underline;
+      }
+    }
+  }
+
+  .footer_right_part {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+
+    h4 {
+      @include setupFontValues(600, 16px, 160%);
+      color: #0E1421;
+    }
+
+    h5 {
+      @include setupFontValues(600, 20px, 160%);
+      color: #008D6A;
+    }
+
+    p {
+      @include setupFontValues(600, 14px, 160%);
+      color: #3E434D;
+    }
+  }
+
+}
+
+@media screen and (max-width: 1080px) {
+  .footer {
+    padding: 40px 15px 44px;
+  }
+}
+
+@media screen and (max-width: 830px) {
+  .footer_part {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 25px;
+    text-align: center;
+
+      .left_footer_part {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        p {
+          padding: 0 35px;
+        }
+      }
+
+    .right_footer_part p {
+      padding: 0 35px;
+    }
+
+  }
+
+  .footer_part .left_footer_part p,
+  .footer_part .right_footer_part p {
+    padding: 0 35px;
+  }
+
+  .footer_part .left_footer_part img {
+    width: 328px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .footer {
+    display: flex;
+    flex-direction: column;
+    row-gap: 35px;
+    padding: 40px 15px 44px;
+
+    .footer_left_part {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+        img {
+          width: 290px;
+        }
+
+        p {
+          width: 100%;
+          text-align: justify;
+          font-size: 18px;
+        }
+    }
+
+    .footer_right_part {
+      width: auto;
+    }
+
+  }
+}

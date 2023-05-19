@@ -1,0 +1,137 @@
+@import 'src/index.scss';
+
+.slider_block {
+  display: flex;
+  justify-content: center;
+
+  .photo_slider {
+    padding: 0 96px 0 96px;
+    margin-top: 40px;
+    width: 100%;
+    text-align: center;
+
+    .slider_title {
+      @include setupFontValues(400, 16px, 160%);
+      color: #008D6A;
+    }
+
+    .slider_subtitle {
+      @include setupFontValues(600, 28px, 160%);
+      color: #0E1421
+    }
+
+    .slider {
+
+      margin-top: 24px;
+      width: 100%;
+      display: flex;
+      column-gap: 24px;
+
+      div {
+
+        &:focus {
+          outline: none;
+        }
+        img {
+          max-width: 100%;
+          border-radius: 4px;
+          padding: 15px;
+          width: 400px;
+          height: 240px;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .slider_buttons {
+      width: 100%;
+      height: auto;
+      display: flex;
+      justify-content: center;
+      column-gap: 24px;
+
+      button {
+        width: 32px;
+        height: 32px;
+        background: #008D6A;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: none;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 800px) and (max-width: 1200px){
+  .slider_block {
+
+    .photo_slider {
+      padding: 0 40px;
+
+      .slider {
+        img {
+          width: 320px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 640px) and (max-width: 830px) {
+    .slider_block {
+      padding-top: -1px;
+    }
+}
+
+@media screen and (min-width: 460px) and (max-width: 1200px) {
+  .slider_block {
+    .photo_slider {
+      .slider {
+        div {
+          img {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 730px) {
+  .slider_block {
+    .photo_slider {
+      padding: 0 30px;
+    }
+  }
+}
+
+@media screen and (max-width: 460px) {
+  .slider_block {
+    .photo_slider {
+      width: 90%;
+      padding: 0 22px;
+      //padding: 0 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .slider {
+        overflow: hidden;
+        div {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          img {
+            //padding: 0 12px;
+            //width: 95%;
+          }
+        }
+      }
+    }
+  }
+}

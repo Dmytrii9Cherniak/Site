@@ -1,0 +1,176 @@
+@import 'src/index.scss';
+
+.wooden_header {
+  width: 100%;
+  height: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  .wooden_photo {
+    width: 100%;
+    height: 100%;
+
+    img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+    }
+  }
+
+  .wooden_photo_content {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    color: #FFFFFF;
+
+    h4 {
+      @include setupFontValues(600, 28px, 160%);
+      color: #FFFFFF;
+    }
+
+    article {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      column-gap: 6px;
+
+      div:nth-child(3) {
+        text-decoration-line: underline;
+        text-underline-offset: 2px;
+      }
+    }
+
+    a {
+      text-underline-offset: 2px;
+      @include setupFontValues(400, 16px, 160%);
+      text-decoration: none;
+      color: #FFFFFF;
+
+        &:hover {
+          text-decoration-line: underline;
+          color: #4DAF97;
+        }
+    }
+  }
+}
+
+.wooden_content {
+  padding-top: 40px;
+  display: flex;
+  justify-content: center;
+  column-gap: 24px;
+  margin-bottom: 178px;
+
+  .wooden_item {
+      width: 612px;
+
+      .item_header {
+        text-align: center;
+
+        h4 {
+          @include setupFontValues(600, 28px, 160%);
+          color: #0E1421;
+        }
+
+        p {
+          @include setupFontValues(400, 18px, 160%);
+          color: #0E1421;
+        }
+
+      }
+
+    .item_characteristics {
+      margin-top: 40px;
+      height: 572px;
+      width: 100%;
+      background: linear-gradient(to bottom, white 0%, white 82px, #F5F6F6 82px, #F5F6F6 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      row-gap: 16px;
+      border-radius: 6px;
+
+      img {
+        height: 243px;
+      }
+
+      .characteristic_list {
+        width: 564px;
+        @include setupFontValues(400, 18px, 160%);
+        padding-bottom: 10px;
+        color: #4A4F59;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1080px) {
+
+  .wooden_content {
+    .wooden_item {
+        width: 400px;
+
+      .item_characteristics {
+        margin-top: 6px;
+        background: linear-gradient(to bottom, white 0%, white 64px, #F5F6F6 64px, #F5F6F6 100%);
+
+        img {
+          height: 160px;
+          width: 306px;
+        }
+
+        .characteristic_list {
+          width: 100%;
+          padding: 10px;
+        }
+      }
+    }
+  }
+
+}
+
+@media screen and (max-width: 820px) {
+  .wooden_content {
+    padding: 40px 20px;
+    margin-bottom: 40px;
+  }
+
+}
+
+@media screen and (max-width: 600px) {
+  .wooden_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 64px;
+  }
+
+}
+
+@media screen and (max-width: 460px) {
+  .wooden_content {
+    padding: 40px 12px;
+  }
+
+}
+
+@media screen and (min-width: 320px) and (max-width: 420px){
+    .wooden_content {
+      .wooden_item {
+        width: 100%;
+
+          .item_characteristics {
+            img {
+              height: 138px;
+              width: 246px;
+            }
+          }
+      }
+    }
+}

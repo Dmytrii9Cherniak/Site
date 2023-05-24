@@ -6,7 +6,7 @@ import '../header/Header.scss';
 function Header() {
 
     const [activeMenu, setActiveMenu] = useState(false);
-    const [currentLanguage, setCurrentLanguage] = useState(localStorage.getItem('translation') || 'ukr');
+    const [currentLanguage, setCurrentLanguage] = useState(localStorage.getItem('translation') || 'eng');
     const [activeDropdown, setActiveDropdown] = useState(false);
     const location = useLocation();
 
@@ -23,6 +23,10 @@ function Header() {
         setActiveMenu(false);
         setActiveDropdown(false);
     }, [location]);
+
+    useEffect(() => {
+
+    }, [currentLanguage])
 
     useEffect(() => {
         document.body.style.overflow = activeMenu ? 'hidden' : 'auto';
@@ -53,12 +57,17 @@ function Header() {
         </div>
 
         <nav className={`menu ${activeMenu ? 'active' : ''}`}>
-            <div><Link to="/" className={`menu-item ${location.pathname === '/home' ? 'active' : ''}`}> Home </Link></div>
+            <div>
+                <Link
+                    to="/"
+                    className={`menu-item ${location.pathname === '/home' ? 'active' : ''}`}> {currentLanguage === 'ukr' ? 'Домашня' : 'Home'}
+                </Link>
+                </div>
             <div className="dropdown_item">
                 <button
                     onClick={openDropdown}
                     className={`menu-item ${location.pathname === '/services' || location.pathname === '/boards' ? 'active' : ''}`}
-                > <p> Services </p>
+                > <p> {currentLanguage === 'ukr' ? 'Послуги' : 'Services'} </p>
                     {!activeDropdown ?
                         <svg width="13" height="8" viewBox="0 0 13 8" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1.61508 0.295078L0.205078 1.70508L6.20508 7.70508L12.2051 1.70508L10.7951 0.295078L6.20508 4.87508L1.61508 0.295078Z"
@@ -75,13 +84,13 @@ function Header() {
                         <Link
                             to="/services"
                             className={`menu-item ${location.pathname === '/services' ? 'active' : ''}`}
-                        > Pallets </Link>
+                        > {currentLanguage === 'ukr' ? 'Палети' : 'Pallets'} </Link>
                     </div>
                     <div>
                         <Link
                             to="/boards"
                             className={`menu-item ${location.pathname === '/boards' ? 'active' : ''}`}
-                        > Boards </Link>
+                        > {currentLanguage === 'ukr' ? 'Дошка' : 'Boards'} </Link>
                     </div>
                 </div>
             </div>
@@ -89,17 +98,19 @@ function Header() {
                 <Link
                     to="/services"
                     className={`menu-item ${location.pathname === '/services' ? 'active' : ''}`}
-                > Pallets </Link>
+                > {currentLanguage === 'ukr' ? 'Палети' : 'Pallets'} </Link>
             </div>
             <div className="media_dropdown_item">
                 <Link
                     to="/boards"
                     className={`menu-item ${location.pathname === '/boards' ? 'active' : ''}`}
-                > Boards </Link>
+                > {currentLanguage === 'ukr' ? 'Дошка' : 'Boards'} </Link>
             </div>
             <div>
-                <Link to="/info"
-                      className={`menu-item ${location.pathname === '/info' ? 'active' : ''}`}> Info </Link></div>
+                <Link
+                    to="/info"
+                    className={`menu-item ${location.pathname === '/info' ? 'active' : ''}`}
+                > {currentLanguage === 'ukr' ? 'Інформація' : 'Info'} </Link></div>
             <div className="right_navigation_desktop">
                 <div className="languages">
                     <button
@@ -117,7 +128,7 @@ function Header() {
                         className={currentLanguage === 'eng' ? 'active' : ''}> ENG </button>
                 </div>
                 <div className="contact_button">
-                    <button onClick={handleContactsClick}> Contacts </button>
+                    <button onClick={handleContactsClick}> {currentLanguage === 'ukr' ? 'Контакти' : 'Contacts'} </button>
                 </div>
             </div>
         </nav>
@@ -138,7 +149,7 @@ function Header() {
                         className={currentLanguage === 'eng' ? 'active' : ''}> ENG </button>
             </div>
             <div className="contact_button">
-                <button onClick={handleContactsClick}> Contacts </button>
+                <button onClick={handleContactsClick}> {currentLanguage === 'ukr' ? 'Контакти' : 'Contacts'} </button>
             </div>
         </div>
 

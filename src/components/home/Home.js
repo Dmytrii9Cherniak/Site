@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import '../home/Home.scss';
-import Contacts from './contacts/Contacts';
+import Contacts from '../contacts/Contacts';
 import GoogleMap from './google_map/GoogleMap';
 import Certificates from './certificates/Certificates';
 import MainContent from './main_content/MainContent';

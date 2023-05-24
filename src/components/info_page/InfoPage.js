@@ -77,7 +77,7 @@ function InfoPage() {
                     <ul>
                         <svg viewBox="0 0 2 188" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <rect y="188" width="188" height="2" rx="0.999999" transform="rotate(-90 0 188)" fill="white"/>
-                            <rect y="188" width="188" height="2" rx="0.999999" transform="rotate(-90 0 188)" fill="#0E1421" fill-opacity="0.2"/>
+                            <rect y="188" width="188" height="2" rx="0.999999" transform="rotate(-90 0 188)" fill="#0E1421" fillOpacity="0.2"/>
                         </svg>
                         <li>
                             <div className="step">

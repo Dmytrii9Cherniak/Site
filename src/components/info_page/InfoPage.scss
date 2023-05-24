@@ -67,6 +67,8 @@
     width: 100%;
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+    row-gap: 24px;
     column-gap: 24px;
 
       div {
@@ -182,6 +184,7 @@
             .step {
               display: flex;
               align-items: flex-start;
+              text-align: start;
 
               .circle {
                 display: flex;
@@ -206,7 +209,7 @@
                 }
 
                 p {
-                  @include setupFontValues(400, 16px, 160%);
+                  @include setupFontValues(400, 14px, 160%);
                   color: #0E1421;
                 }
               }
@@ -336,5 +339,133 @@
       border: none;
     }
   }
+
+}
+
+@media screen and (min-width: 900px) and (max-width: 1100px) {
+
+    .info_page {
+      .form {
+        .left_form_content {
+          width: 460px;
+          padding: 0 20px;
+        }
+
+        .right_form {
+          width: 450px;
+
+          label {
+            input, textarea {
+              width: 100%;
+            }
+          }
+
+        }
+      }
+    }
+
+}
+
+@media screen and (min-width: 560px) and (max-width: 1264px) {
+  .info_page {
+    .form {
+      margin-top: 400px;
+    }
+  }
+}
+
+@media screen and (min-width: 460px) and (max-width: 900px) {
+    .info_page {
+      .header_blocks {
+        display: flex;
+        column-gap: 12px;
+      }
+
+      .form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: 600px;
+
+        .left_form_content {
+          padding: 0 18px;
+          width: 100%;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+        }
+      }
+    }
+}
+
+@media screen and (min-width: 310px) and (max-width: 560px) {
+
+  .info_page {
+
+      .header_blocks {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        row-gap: 24px;
+
+          div {
+            width: 90%;
+          }
+
+          div:nth-child(1) {
+            height: 210px;
+          }
+
+      }
+
+      .form {
+        margin-top: 648px;
+        padding: 10px 16px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+          .left_form_content {
+            text-align: center;
+            width: 100%;
+
+              .contact_steps {
+                .step {
+                  text-align: start;
+                }
+              }
+          }
+
+          .right_form {
+            width: 100%;
+            margin-bottom: 40px;
+
+              label {
+                input, textarea {
+                  width: 100%;
+                }
+              }
+          }
+      }
+  }
+}
+
+@media screen and (min-width: 310px) and (max-width: 360px) {
+    .info_page {
+
+      .header_blocks {
+        div:nth-child(1) {
+          height: 240px;
+        }
+      }
+
+      .form {
+        margin-top: 680px;
+      }
+    }
 
 }

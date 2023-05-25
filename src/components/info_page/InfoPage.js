@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import Contacts from '../contacts/Contacts';
 import infoHeader from '../../media/info_header.png';
@@ -9,6 +9,24 @@ function InfoPage() {
 
     const [isChecked, setIsChecked] = useState(false);
     const [isModalWindowOpened, setIsModalWindowOpened] = useState(false);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    useEffect(() => {
+        const handleResize = () => setWindowWidth(window.innerWidth);
+        window.addEventListener('resize', handleResize);
+
+        const formBlock = document.querySelector('.form');
+
+        if (windowWidth >= 560 && windowWidth <= 828) {
+            formBlock.style.marginTop = '590px';
+            console.log('ok')
+        } else if (windowWidth >= 828 && windowWidth <= 1264) {
+            formBlock.style.marginTop = '390px';
+        }
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, [windowWidth]);
+
 
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked);

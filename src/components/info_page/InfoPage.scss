@@ -67,6 +67,10 @@
     width: 100%;
     display: flex;
     justify-content: center;
+
+    flex-wrap: wrap;
+    row-gap: 24px;
+
     column-gap: 24px;
 
       div {
@@ -406,7 +410,6 @@
       left: 50%;
       width: 100%;
       transform: translate(-50%, 0);
-
     }
   }
 
@@ -421,6 +424,7 @@
       }
 
       .form {
+        margin-top: 340px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -433,17 +437,6 @@
           justify-content: center;
           align-items: center;
           text-align: center;
-        }
-
-        .right_form {
-          label {
-            input, textarea {
-              &:focus {
-                box-shadow: 0 0 6px 0 rgba(0, 141, 106, 0.57);
-                -webkit-box-shadow: 0 0 6px 0 rgba(0, 141, 106, 0.57);
-              }
-            }
-          }
         }
 
       }

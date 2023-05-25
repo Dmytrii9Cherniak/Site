@@ -130,7 +130,7 @@
 
   .form_message {
     padding: 24px;
-    width: 506px;
+    //width: 506px;
     height: 92px;
     position: fixed;
     right: 14px;
@@ -138,6 +138,8 @@
     background-color: #F5F6F6;
     border-radius: 6px;
     display: flex;
+    align-items: center;
+    column-gap: 14px;
     @include setupFontValues(400, 14px, 160%);
     color: #3E434D;
     z-index: 1;
@@ -408,7 +410,9 @@
   .info_page {
     .form_message {
       left: 50%;
-      width: 100%;
+      bottom: 80px;
+      width: 70%;
+      justify-content: space-around;
       transform: translate(-50%, 0);
     }
   }

@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Contacts from '../contacts/Contacts';
 import infoHeader from '../../media/info_header.png';
 import progressPoint from '../../media/progress_point.png';
@@ -7,14 +7,14 @@ import '../info_page/InfoPage.scss';
 
 function InfoPage() {
 
-    const [isChecked, setIsChecked] = useState(false);
+    const [isChecked, setIsChecked] = useState(true);
     const [isModalWindowOpened, setIsModalWindowOpened] = useState(false);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [inputValues, setInputValues] = useState({
-        name: '',
-        email: '',
-        number: '',
-        message: ''
+        name: 'fsdgdsff',
+        email: 'fdsdfg@gmail.com',
+        number: '43858538848354',
+        message: 'true'
     });
     const [errors, setErrors] = useState({});
 
@@ -51,12 +51,42 @@ function InfoPage() {
         setIsModalWindowOpened(false);
     };
 
-    const submitForm = () => {
+    const fetchData = async (body) => {
+        try {
+           await fetch('http://localhost:8000/send', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            })
+               .then((res) => {
+                   return res.json()
+               })
+               .then((data) => {
+                    return data
+                });
+        } catch (error) {
+            console.error('Помилка:', error);
+        }
+    };
+
+    const submitForm = async () => {
             validateForm();
-            setIsModalWindowOpened(true);
-            setTimeout(() => {
-                closeFormModalWindow();
-            }, 6000);
+
+        const objectSend = {
+            name: inputValues.name,
+            email: inputValues.email,
+            number: inputValues.number,
+            message: inputValues.message
+        }
+
+        await fetchData(objectSend);
+
+        setTimeout(() => {
+            closeFormModalWindow();
+        },6000);
     };
 
     const inputOnChange = (event) => {
@@ -136,10 +166,21 @@ function InfoPage() {
 
         <div className={`form_message ${isModalWindowOpened ? 'isModalWindowOpened' : ''}`}>
             <div className="mark_point">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {Object.keys(errors).length > 0 && (<div>
+                    <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                        <g id="Layer_58" fill="">
+                            <path className="cls-1" d="M16,26a2,2,0,1,1,2-2A2,2,0,0,1,16,26Zm0-2Z"/>
+                            <path className="cls-1" d="M16,20a1,1,0,0,1-1-1V11a1,1,0,0,1,2,0v8A1,1,0,0,1,16,20Z"/>
+                            <path className="cls-1"
+                                  d="M27.78,30H4.22a3.19,3.19,0,0,1-2.77-1.57,3.13,3.13,0,0,1-.06-3.13L13.17,3.67a3.23,3.23,0,0,1,5.66,0L30.61,25.3a3.13,3.13,0,0,1-.06,3.13A3.19,3.19,0,0,1,27.78,30ZM16,4a1.18,1.18,0,0,0-1.07.63L3.15,26.25a1.12,1.12,0,0,0,0,1.16,1.19,1.19,0,0,0,1,.59H27.78a1.19,1.19,0,0,0,1-.59,1.12,1.12,0,0,0,0-1.16L17.07,4.63A1.18,1.18,0,0,0,16,4Z"/>
+                        </g>
+                    </svg>
+                </div>)}
+                {Object.keys(errors).length === 0 && (<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10 0C8.02219 0 6.08879 0.58649 4.4443 1.6853C2.79981 2.78412 1.51809 4.3459 0.761209 6.17317C0.00433284 8.00043 -0.193701 10.0111 0.192152 11.9509C0.578004 13.8907 1.53041 15.6725 2.92894 17.0711C4.32746 18.4696 6.10929 19.422 8.0491 19.8079C9.98891 20.1937 11.9996 19.9957 13.8268 19.2388C15.6541 18.4819 17.2159 17.2002 18.3147 15.5557C19.4135 13.9112 20 11.9778 20 10C20 8.68678 19.7413 7.38642 19.2388 6.17317C18.7363 4.95991 17.9997 3.85752 17.0711 2.92893C16.1425 2.00035 15.0401 1.26375 13.8268 0.761205C12.6136 0.258658 11.3132 0 10 0ZM14.3 7.61L9.73 13.61C9.63685 13.731 9.51721 13.8291 9.38027 13.8967C9.24333 13.9643 9.09272 13.9996 8.94 14C8.78811 14.0008 8.63803 13.967 8.50115 13.9012C8.36426 13.8353 8.24418 13.7392 8.15 13.62L5.71 10.51C5.62924 10.4063 5.5697 10.2876 5.53479 10.1609C5.49988 10.0341 5.49027 9.90172 5.50652 9.77126C5.52277 9.64079 5.56456 9.5148 5.6295 9.40049C5.69444 9.28617 5.78126 9.18576 5.885 9.105C6.09453 8.94189 6.36026 8.8687 6.62375 8.90152C6.75421 8.91777 6.8802 8.95955 6.99452 9.02449C7.10884 9.08943 7.20924 9.17626 7.29 9.28L8.92 11.36L12.7 6.36C12.7801 6.25494 12.8801 6.16669 12.9943 6.10029C13.1086 6.03388 13.2347 5.99062 13.3657 5.97298C13.4966 5.95534 13.6297 5.96365 13.7574 5.99746C13.8851 6.03126 14.0049 6.08989 14.11 6.17C14.2151 6.25011 14.3033 6.35012 14.3697 6.46433C14.4361 6.57855 14.4794 6.70472 14.497 6.83565C14.5147 6.96658 14.5063 7.0997 14.4725 7.22742C14.4387 7.35514 14.3801 7.47494 14.3 7.58V7.61Z" fill="#008D6A"/>
-                </svg>
+                </svg>)}
             </div>
+
             {!errors.name && !errors.email && !errors.number && !errors.checkbox && (
                 <p>Your message successfully sent. We will connect with you as soon as possible.</p>
             )}

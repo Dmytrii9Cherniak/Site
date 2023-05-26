@@ -51,27 +51,6 @@ function InfoPage() {
         setIsModalWindowOpened(false);
     };
 
-    const fetchData = async (body) => {
-        try {
-           await fetch('http://localhost:8000/send', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(body)
-            })
-               .then((res) => {
-                   return res.json()
-               })
-               .then((data) => {
-                    return data
-                });
-        } catch (error) {
-            console.error('Помилка:', error);
-        }
-    };
-
     const submitForm = async () => {
             validateForm();
 
@@ -82,7 +61,10 @@ function InfoPage() {
             message: inputValues.message
         }
 
-        await fetchData(objectSend);
+        await fetch(`http://localhost:8000/send`, {
+            method: 'POST',
+            body: JSON.stringify(objectSend)
+        }).then(res => res.json());
 
         setTimeout(() => {
             closeFormModalWindow();

@@ -43,14 +43,13 @@ router.post('/send', (req, res, next) => {
         const phone = req.body.number;
         const email = req.body.email;
         const message = req.body.message;
-
-        const content = `Name: ${name} \n Phone: ${phone} \n Email: ${email} \n Message: ${message} \n`;
+        let content = {"Name": name , "Phone": phone, "Email": email, "Message": message}
         const mail = {
             from: transport.auth.user,
-            to: 'dimasik11chernyak@gmail.com',
+            to: 'dcheyrnak10@gmail.com',
             subject: 'New Message',
-            text: content
-        };
+            text: `Name: ${name} \n Phone: ${phone} \n Email: ${email} \n Message: ${message} \n`
+    };
         transporter.sendMail(mail, (err, data) => {
             if (err) {
                 console.error(err);

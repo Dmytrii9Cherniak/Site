@@ -145,15 +145,17 @@
     z-index: 1;
     transition: opacity 600ms;
     opacity: 0;
+    visibility: hidden;
 
       &.isModalWindowOpened {
+        visibility: visible;
+        transition: opacity 600ms;
         opacity: 1;
       }
 
       .mark_point {
         width: 40px;
         height: 40px;
-        //padding: 10px;
       }
 
       div {
@@ -307,6 +309,12 @@
               box-shadow: 0 0 6px 0 rgba(0, 141, 106, 0.57);
               transition: 0.2s;
             }
+          }
+
+          .error {
+            padding: 10px 0 0 4px;
+            @include setupFontValues(600, 16px, 160%);
+            color: red;
           }
         }
 

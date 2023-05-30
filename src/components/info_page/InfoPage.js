@@ -10,9 +10,9 @@ function InfoPage() {
     const [isModalWindowOpened, setIsModalWindowOpened] = useState(false);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [inputValues, setInputValues] = useState({
-        name: '',
-        email: '',
-        number: '',
+        name: 'dfgdfjjdfs',
+        email: 'fdgdsf@gmail.com',
+        number: '43523452345345',
         message: ''
     });
     const [errors, setErrors] = useState({});
@@ -59,32 +59,32 @@ function InfoPage() {
         }
 
         if (formValid) {
-            // const response = await fetch(`http://localhost:8000/send`, {
-            //     method: 'POST',
-            //     mode: 'cors',
-            //     cache: 'no-cache',
-            //     credentials: 'same-origin',
-            //     headers: {
-            //         'Access-Control-Allow-Origin': '*',
-            //         'Access-Control-Allow-Headers': '*',
-            //         'Content-Type': 'application/json',
-            //     },
-            //     redirect: 'follow',
-            //     referrerPolicy: 'no-referrer',
-            //     body: JSON.stringify(objectSend)
-            // });
+            const response = await fetch(`/send`, {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'no-cache',
+                credentials: 'same-origin',
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Access-Control-Allow-Headers': '*',
+                    'Content-Type': 'application/json',
+                },
+                redirect: 'follow',
+                referrerPolicy: 'no-referrer',
+                body: JSON.stringify(objectSend)
+            });
 
-            inputValues.name = '';
-            inputValues.email = '';
-            inputValues.number = '';
-            inputValues.message = '';
+            // inputValues.name = '';
+            // inputValues.email = '';
+            // inputValues.number = '';
+            // inputValues.message = '';
             setIsModalWindowOpened(true);
 
             setTimeout(() => {
                 setIsModalWindowOpened(false);
             }, 6000)
 
-            // return await response.json();
+            return await response.json();
         }
     };
 

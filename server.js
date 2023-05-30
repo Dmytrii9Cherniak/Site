@@ -7,8 +7,8 @@ require('dotenv').config();
 const path = require('path');
 
 const app = express();
-const port = 8000;
-const host = 'localhost';
+const port = process.env.PORT || 8000;
+const host = process.env.HOST || 'localhost';
 
 app.use(express.static(path.join(__dirname, 'build')));
 
@@ -71,9 +71,13 @@ router.post('/send', (req, res, next) => {
 
 const http = require("http");
 let server = http.createServer(app)
+
+// const https = require('node:https');
+// let server = https.createServer(app);
+
 app.use(cors());
 app.use(express.json());
 app.use('/', router);
-server.listen(port,host, () => {
+server.listen(port, host, () => {
     console.log(`Server is up!`)
 });

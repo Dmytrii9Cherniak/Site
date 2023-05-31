@@ -130,7 +130,7 @@
 
   .form_message {
     padding: 24px;
-    //width: 506px;
+    width: 460px;
     height: 92px;
     position: fixed;
     right: 14px;
@@ -149,13 +149,8 @@
 
       &.isModalWindowOpened {
         visibility: visible;
-        transition: opacity 600ms;
         opacity: 1;
-      }
-
-      .mark_point {
-        width: 40px;
-        height: 40px;
+        transition: opacity 600ms;
       }
 
       div {
@@ -419,7 +414,7 @@
     .form_message {
       left: 50%;
       bottom: 80px;
-      width: 70%;
+      width: 84%;
       justify-content: space-around;
       transform: translate(-50%, 0);
     }

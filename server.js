@@ -43,13 +43,73 @@ router.post('/send', (req, res, next) => {
         const phone = req.body.number;
         const email = req.body.email;
         const message = req.body.message;
-        let content = {"Name": name , "Phone": phone, "Email": email, "Message": message}
+        const language = req.body.language
+
+        const order = {
+            from: transport.auth.user,
+            to: 'messagestest291@gmail.com',
+            subject: 'Нова заявка',
+            html: `<h2> 
+                        <b> Доброго дня, до вас нова заявка: </b> 
+                    </h2> 
+                        <p> Name: ${name} </p>
+                        <p> Phone: ${phone} </p>
+                        <p> Email: ${email} </p>
+                        <p> Message: ${!message.length ? 'Користувач не написав повідомлення' : message} </p>
+                    <br>
+                    <br>
+                    <img src="cid:logo" alt="logo" />`,
+            attachments: [
+                {
+                    filename: 'logo.png',
+                    path: path.join(__dirname, 'src', 'media', 'logo.png'),
+                    cid: 'logo'
+                }
+            ]
+    };
+        transporter.sendMail(order, (err, data) => {
+            if (err) {
+                console.error(err);
+                res.json({
+                    status: 'fail'
+                });
+            } else {
+                res.json({
+                    status: 'success'
+                });
+            }
+        });
+
         const mail = {
             from: transport.auth.user,
-            to: 'dcheyrnak10@gmail.com',
-            subject: 'New Message',
-            text: `Name: ${name} \n Phone: ${phone} \n Email: ${email} \n Message: ${message} \n`
-    };
+            to: email,
+            subject: `${name}, ${language === 'ukr' ? 'Дякуємо за заявку' : 'Thank you for application'}`,
+            html: `<h2>   
+                        <b> ${language === 'ukr' ? `Доброго дня, ${name}` : `Good evening, ${name}` } </b>
+                    </h2> 
+                        <p> 
+                            ${language === 'ukr'
+                                ? 'Дякуємо вам за те, що приділили увагу нашій компанії і за відправлену вами заявку. ' +
+                                  'Найближчим часом наші фахівці зв`яжуться з вами і нададуть усі відповіді на ваші питання'
+                                : 'Thank you for paying attention to our company and for your application.' + 
+                                  'In the near future, our specialists will contact you and provide all the answers to your questions'}
+                         </p>
+                    <br>
+                    <br>
+                    <p> ${language === 'urk' 
+                                ? 'З найкращими побажаннями, відділ продажу Palletenwerk'
+                                : 'Best regards, sales department Palletenwerk'} 
+                    <br>
+                    <img src="cid:logo" alt="logo" />`,
+            attachments: [
+                {
+                    filename: 'logo.png',
+                    path: path.join(__dirname, 'src', 'media', 'logo.png'),
+                    cid: 'logo'
+                }
+            ]
+        };
+
         transporter.sendMail(mail, (err, data) => {
             if (err) {
                 console.error(err);
@@ -62,7 +122,12 @@ router.post('/send', (req, res, next) => {
                 });
             }
         });
-        res.status(200).send(content)
+
+        res.status(200).send({
+            message: `${language === 'urk' 
+                ? 'Ваша заявка успішно відправлена на вказані ваші дані. Очікуйте на нашу відповідь'
+                : 'Your application has been successfully sent to your specified data. Wait for our reply'}`
+        })
     } catch (error) {
         res.status(400).send(error.message);
         console.error(error);

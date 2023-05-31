@@ -9,6 +9,7 @@ function InfoPage() {
 
     const [isModalWindowOpened, setIsModalWindowOpened] = useState(false);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [responseMessage, setResponseMessage] = useState(null);
     const [inputValues, setInputValues] = useState({
         name: 'dfgdfjjdfs',
         email: 'fdgdsf@gmail.com',
@@ -48,18 +49,19 @@ function InfoPage() {
         return Object.keys(errors).length === 0;
     };
 
-    const submitForm = async () => {
+    const submitForm = () => {
         const formValid = validateForm();
 
         const objectSend = {
             name: inputValues.name,
             email: inputValues.email,
             number: inputValues.number,
-            message: inputValues.message
+            message: inputValues.message,
+            language: localStorage.getItem('language')
         }
 
         if (formValid) {
-            const response = await fetch(`/send`, {
+            fetch(`/send`, {
                 method: 'POST',
                 mode: 'cors',
                 cache: 'no-cache',
@@ -72,19 +74,21 @@ function InfoPage() {
                 redirect: 'follow',
                 referrerPolicy: 'no-referrer',
                 body: JSON.stringify(objectSend)
+            }).then(res => {
+                return res.json();
+            }).then(data => {
+                setResponseMessage(data);
             });
 
-            // inputValues.name = '';
-            // inputValues.email = '';
-            // inputValues.number = '';
-            // inputValues.message = '';
+            inputValues.name = '';
+            inputValues.email = '';
+            inputValues.number = '';
+            inputValues.message = '';
             setIsModalWindowOpened(true);
 
             setTimeout(() => {
                 setIsModalWindowOpened(false);
-            }, 6000)
-
-            return await response.json();
+            }, 2000);
         }
     };
 
@@ -167,7 +171,7 @@ function InfoPage() {
                 </svg>)}
             </div>
             {!errors.name && !errors.email && !errors.number && (
-                <p>Your message successfully sent. We will connect with you as soon as possible.</p>
+                <p> {responseMessage?.message} </p>
             )}
             <div>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="close_svg" onClick={closeFormModalWindow}>

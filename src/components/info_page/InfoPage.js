@@ -10,6 +10,7 @@ function InfoPage() {
     const [isModalWindowOpened, setIsModalWindowOpened] = useState(false);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const [responseMessage, setResponseMessage] = useState(null);
+    const [language, setLanguage] = useState(localStorage.getItem('translation'));
     const [inputValues, setInputValues] = useState({
         name: 'dfgdfjjdfs',
         email: 'fdgdsf@gmail.com',
@@ -57,7 +58,7 @@ function InfoPage() {
             email: inputValues.email,
             number: inputValues.number,
             message: inputValues.message,
-            language: localStorage.getItem('language')
+            language: localStorage.getItem('translation')
         }
 
         if (formValid) {
@@ -88,9 +89,17 @@ function InfoPage() {
 
             setTimeout(() => {
                 setIsModalWindowOpened(false);
-            }, 2000);
+            }, 6000);
         }
     };
+
+    useEffect(() => {
+        setLanguage(localStorage.getItem('translation'));
+    }, []);
+
+    useEffect(() => {
+        setLanguage(localStorage.getItem('translation'));
+    }, [language]);
 
     const inputOnChange = (event) => {
         const { name, value } = event.target;

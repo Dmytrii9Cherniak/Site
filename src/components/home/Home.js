@@ -18,8 +18,8 @@ function Home() {
                 <MainContent />
                 <ImagesSlider/>
                 <Certificates />
-                <GoogleMap />
-                <Contacts />
+                {/*<GoogleMap />*/}
+                <Contacts />+
             </main>);
 }
 

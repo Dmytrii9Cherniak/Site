@@ -7,7 +7,7 @@ require('dotenv').config();
 const path = require('path');
 
 const app = express();
-const port = process.env.PORT || 8000;
+const port = process.env.PORT_BACKEND;
 const host = process.env.HOST || 'localhost';
 
 app.use(express.static(path.join(__dirname, 'build')));
@@ -96,9 +96,10 @@ router.post('/send', (req, res, next) => {
                          </p>
                     <br>
                     <br>
-                    <p> ${language === 'urk' 
+                    <p> ${language === 'ukr' 
                                 ? 'З найкращими побажаннями, відділ продажу Palletenwerk'
-                                : 'Best regards, sales department Palletenwerk'} 
+                                : 'Best regards, Sales department Palletenwerk'} 
+                    <br>
                     <br>
                     <img src="cid:logo" alt="logo" />`,
             attachments: [
@@ -124,7 +125,7 @@ router.post('/send', (req, res, next) => {
         });
 
         res.status(200).send({
-            message: `${language === 'urk' 
+            message: `${language === 'ukr' 
                 ? 'Ваша заявка успішно відправлена на вказані ваші дані. Очікуйте на нашу відповідь'
                 : 'Your application has been successfully sent to your specified data. Wait for our reply'}`
         })

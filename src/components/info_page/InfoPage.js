@@ -12,9 +12,9 @@ function InfoPage() {
     const [responseMessage, setResponseMessage] = useState(null);
     const [language, setLanguage] = useState(localStorage.getItem('translation'));
     const [inputValues, setInputValues] = useState({
-        name: 'dfgdfjjdfs',
-        email: 'fdgdsf@gmail.com',
-        number: '43523452345345',
+        name: '',
+        email: '',
+        number: '',
         message: ''
     });
     const [errors, setErrors] = useState({});
@@ -27,11 +27,11 @@ function InfoPage() {
         const errors = {};
 
         if (!inputValues.name.length) {
-            errors.name = 'Ім`я повинне бути введене';
+            errors.name = language === 'ukr' ? 'Ім`я повинне бути введене' : 'Name can`t be empty'
         } else if (inputValues.name.length < 2) {
-            errors.name = 'Ім`я повинне мати як мінімум 2 символи';
+            errors.name = language === 'ukr' ? 'Ім`я повинне мати як мінімум 2 символи' : 'Name must be at least 2 characters'
         } else if (/[0-9]/.test(inputValues.name)) {
-            errors.name = 'Цифри в імені заборонено';
+            errors.name = language === 'ukr' ? 'Цифри в імені заборонені' : 'Numbers are not allowed in the name';
         }
 
         if (!inputValues.email.length) {
@@ -82,13 +82,10 @@ function InfoPage() {
                 setIsModalWindowOpened(true);
             });
 
-            console.log(objectSend);
-
             inputValues.name = '';
             inputValues.email = '';
             inputValues.number = '';
             inputValues.message = '';
-            setIsModalWindowOpened(true);
 
             setTimeout(() => {
                 setIsModalWindowOpened(false);
@@ -136,7 +133,7 @@ function InfoPage() {
                 <h4> Contacts </h4>
                 <article>
                     <div><Link to="/home"> Home </Link></div>
-                    <div> /</div>
+                    <div> / </div>
                     <div><p> Contacts </p></div>
                 </article>
             </div>

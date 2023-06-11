@@ -47,7 +47,8 @@ function Header() {
                 localStorage.setItem('translation', 'eng');
                 break;
             default:
-                return '';
+                setCurrentLanguage('ukr');
+                localStorage.setItem('translation', 'ukr');
         }
     };
 

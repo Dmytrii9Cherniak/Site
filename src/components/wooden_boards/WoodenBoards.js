@@ -1,8 +1,8 @@
 import React from 'react';
 import woodenPhoto from '../../media/wooden.header.png';
-import photoSlider1 from '../../media/slider1.png';
+import photoSlider1 from '../../media/cube.png';
 import photoSlider2 from '../../media/slider2.png';
-import photoSlider3 from'../../media/slider3.png';
+import photoSlider3 from'../../media/small.png';
 import GreenTruckContactInfo from '../greenTruckContactInfo/GreenTruckContactInfo';
 import { Link } from 'react-router-dom';
 import '../wooden_boards/WoodenBoards.scss';

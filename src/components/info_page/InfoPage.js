@@ -103,9 +103,7 @@ function InfoPage() {
     };
 
     useEffect(() => {
-        const handleResize = () => {
-            setWindowWidth(window.innerWidth);
-        };
+        const handleResize = () => setWindowWidth(window.innerWidth);
 
         window.addEventListener('resize', handleResize);
 
@@ -260,11 +258,8 @@ function InfoPage() {
                 <label>
                     <h4> Message </h4>
                     <textarea placeholder="Your message" value={inputValues.message} name="message" onChange={inputOnChange}></textarea>
-                    {!errors.message && <p className="error">{errors.checkbox}</p>}
                 </label>
-                <div className="button">
-                    <button onClick={submitForm}> Submit </button>
-                </div>
+                <button onClick={submitForm}> Submit </button>
             </div>
         </main>
 

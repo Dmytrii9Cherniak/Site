@@ -60,42 +60,37 @@ function InfoPage() {
             message: inputValues.message,
             language: localStorage.getItem('translation')
         }
-
-        if (formValid) {
-            fetch(`http://localhost:5000/send`, {
-                method: 'POST',
-                mode: 'cors',
-                cache: 'no-cache',
-                credentials: 'same-origin',
-                headers: {
-                    'Access-Control-Allow-Origin': '*',
-                    'Access-Control-Allow-Headers': '*',
-                    'Content-Type': 'application/json',
-                },
-                redirect: 'follow',
-                referrerPolicy: 'no-referrer',
-                body: JSON.stringify(objectSend)
-            }).then(res => {
-                return res.json();
-            }).then(data => {
-                setResponseMessage(data);
-                setIsModalWindowOpened(true);
-            });
-
-            inputValues.name = '';
-            inputValues.email = '';
-            inputValues.number = '';
-            inputValues.message = '';
-
-            setTimeout(() => {
-                setIsModalWindowOpened(false);
-            }, 6000);
-        }
+        // if (formValid) {
+        //     fetch(`http://localhost:5000/send`, {
+        //         method: 'POST',
+        //         mode: 'cors',
+        //         cache: 'no-cache',
+        //         credentials: 'same-origin',
+        //         headers: {
+        //             'Access-Control-Allow-Origin': '*',
+        //             'Access-Control-Allow-Headers': '*',
+        //             'Content-Type': 'application/json',
+        //         },
+        //         redirect: 'follow',
+        //         referrerPolicy: 'no-referrer',
+        //         body: JSON.stringify(objectSend)
+        //     }).then(res => {
+        //         return res.json();
+        //     }).then(data => {
+        //         setResponseMessage(data);
+        //         setIsModalWindowOpened(true);
+        //     });
+        //
+        //     inputValues.name = '';
+        //     inputValues.email = '';
+        //     inputValues.number = '';
+        //     inputValues.message = '';
+        //
+        //     setTimeout(() => {
+        //         setIsModalWindowOpened(false);
+        //     }, 6000);
+        // }
     };
-
-    useEffect(() => {
-        setLanguage(localStorage.getItem('translation'));
-    }, []);
 
     useEffect(() => {
         setLanguage(localStorage.getItem('translation'));
@@ -108,9 +103,16 @@ function InfoPage() {
     };
 
     useEffect(() => {
-        const handleResize = () => setWindowWidth(window.innerWidth);
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
+
         window.addEventListener('resize', handleResize);
 
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    useEffect(() => {
         const formBlock = document.querySelector('.form');
 
         if (windowWidth >= 560 && windowWidth <= 828) {
@@ -119,9 +121,10 @@ function InfoPage() {
             formBlock.style.marginTop = '390px';
         }
 
-        return () => window.removeEventListener('resize', handleResize);
+        return () => {
+            formBlock.style.marginTop = '';
+        };
     }, [windowWidth]);
-
 
     return (<div className="info_page">
 
@@ -141,34 +144,33 @@ function InfoPage() {
 
         <main className="header_blocks">
             <div>
-                <header>
+                <nav>
                     <svg width="56" height="1" viewBox="0 0 56 1" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <line opacity="0.35" y1="0.5" x2="56" y2="0.5" stroke="white"/>
                     </svg>
                     <h4> Our office </h4>
                     <p> Offers services in the design and production </p>
-                </header>
+                </nav>
                 <h6> 105 Shota Rustaveli St., Kyiv, Ukraine, 01001 </h6>
             </div>
             <div>
-                <header>
+                <nav>
                     <svg width="56" height="1" viewBox="0 0 56 1" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <line opacity="0.35" y1="0.5" x2="56" y2="0.5" stroke="#0E1421"/>
                     </svg>
                     <h4> Email us </h4>
                     <p> Offers services in the design and production. </p>
-                </header>
+                </nav>
                 <h6> email@email.com </h6>
             </div>
             <div>
-                <header>
+                <nav>
                     <svg width="56" height="1" viewBox="0 0 56 1" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <line opacity="0.35" y1="0.5" x2="56" y2="0.5" stroke="white"/>
                     </svg>
                     <h4> Call us </h4>
                     <p> 105 Shota Rustaveli St., Kyiv, Ukraine, 01001 </p>
-                </header>
-
+                </nav>
                 <h6> +48 604 592 700 </h6>
             </div>
         </main>
@@ -252,7 +254,7 @@ function InfoPage() {
                 </label>
                 <label>
                     <h4> Phone number </h4>
-                    <input type="number" name="number" value={inputValues.number} placeholder="Your number" onChange={inputOnChange} />
+                    <input name="number" value={inputValues.number} placeholder="Your number" onChange={inputOnChange} />
                     {errors.number && <p className="error">{errors.number}</p>}
                 </label>
                 <label>
@@ -265,6 +267,7 @@ function InfoPage() {
                 </div>
             </div>
         </main>
+
         <Contacts/>
 
     </div>);

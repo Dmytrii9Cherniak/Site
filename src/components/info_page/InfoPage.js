@@ -42,8 +42,8 @@ function InfoPage() {
 
         if (!inputValues.number.length) {
             errors.number = 'Номер повинен бути заповнений';
-        } else if (!/^\d{10}$/.test(inputValues.number) && inputValues.number.length < 10) {
-            errors.number = 'Неправильний формат';
+        } else if (!/^\d{10}$/.test(inputValues.number)) {
+            errors.number = 'Номер повинен містити рівно 10 цифр';
         }
 
         setErrors(errors);
@@ -98,7 +98,12 @@ function InfoPage() {
 
     const inputOnChange = (event) => {
         const { name, value } = event.target;
-        setInputValues({ ...inputValues, [name]: value });
+        if (name === 'number') {
+            const numberValue = value.replace(/\D/g, '');
+            setInputValues({ ...inputValues, [name]: numberValue });
+        } else {
+            setInputValues({ ...inputValues, [name]: value });
+        }
         setErrors({...errors, [name]: false});
     };
 
@@ -242,17 +247,17 @@ function InfoPage() {
             <div className="right_form">
                 <label>
                     <h4> Name </h4>
-                    <input type="text" name="name" placeholder="Your Name" value={inputValues.name} onChange={inputOnChange} />
+                    <input type="text" name="name" placeholder="Your Name" value={inputValues.name} onChange={inputOnChange} autoComplete="off" />
                     {errors.name && <p className="error"> {errors.name} </p>}
                 </label>
                 <label>
                     <h4> Email </h4>
-                    <input type="email" name="email" value={inputValues.email} placeholder="email@email.com" onChange={inputOnChange} />
+                    <input type="email" name="email" value={inputValues.email} placeholder="email@email.com" onChange={inputOnChange} autoComplete="off" />
                     {errors.email && <p className="error">{errors.email}</p>}
                 </label>
                 <label>
                     <h4> Phone number </h4>
-                    <input name="number" value={inputValues.number} placeholder="Your number" onChange={inputOnChange} />
+                    <input name="number" type="tel" value={inputValues.number} placeholder="Your number" onChange={inputOnChange} autoComplete="off" />
                     {errors.number && <p className="error">{errors.number}</p>}
                 </label>
                 <label>
